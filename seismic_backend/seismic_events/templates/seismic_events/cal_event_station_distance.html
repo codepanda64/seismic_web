@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>计算事件与所有站点的距离</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <label for="event_latitude">事件纬度:</label>
+    <input type="text" id="event_latitude" name="event_latitude" required>
+    <label for="event_longitude">事件经度:</label>
+    <input type="text" id="event_longitude" name="event_longitude" required>
+    <button type="submit">计算</button>
+  </form>
+  {% if station_distance_list %}
+  <ul>
+    {% for station, distance in station_distance_list %}
+    <li>{{ station.network }}/{{ station.code }}[{{station.name}}]({{station.latitude}}, {{station.longitude}}): {{ distance }} km</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  
+</body>
+</html>
